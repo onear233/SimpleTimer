@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTimer", "SimpleTimer\SimpleTimer.csproj", "{DBC2C86B-B5D9-48B6-9D73-24DAA031B81C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBC2C86B-B5D9-48B6-9D73-24DAA031B81C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC2C86B-B5D9-48B6-9D73-24DAA031B81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC2C86B-B5D9-48B6-9D73-24DAA031B81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC2C86B-B5D9-48B6-9D73-24DAA031B81C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE9A62CA-0562-4F6E-A8B4-C2F61ECA65B3}
+	EndGlobalSection
+EndGlobal
