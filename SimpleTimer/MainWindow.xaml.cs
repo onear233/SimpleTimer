@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,26 @@ namespace SimpleTimer
         {
             InitializeComponent();
         }
+
+
+
+        private void ButtonRestartApp_OnClick(object sender, RoutedEventArgs e)
+        {
+            ShowRestartDialog();
+        }
+
+        private async void ShowRestartDialog()
+        {
+            Application.Current.Shutdown();
+        }
+
+        
+
+        private void ButtonBaseToggleNavigationDrawer_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }
