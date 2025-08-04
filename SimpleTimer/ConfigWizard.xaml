@@ -7,10 +7,15 @@
     xmlns:local="clr-namespace:SimpleTimer"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:SimpleTimer.ViewModels"
     Title="创建新配置文件向导"
     Width="800"
     Height="450"
     mc:Ignorable="d">
+
+    <Window.DataContext>
+        <viewmodels:ConfigWizardViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -18,34 +23,71 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <materialDesign:Transitioner Grid.Row="0">
+            <materialDesign:Transitioner
+                Grid.Row="0"
+                AutoApplyTransitionOrigins="True"
+                SelectedIndex="{Binding SlideIndex}">
                 <materialDesign:TransitionerSlide>
-                    <TextBlock
-                        Margin="16,16,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="欢迎使用 SimpleTimer 配置向导" />
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="16,16,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                Text="欢迎使用 SimpleTimer 配置向导" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="1"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                            <Button Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" Style="{StaticResource MaterialDesignPaperButton}">
+                                <controls:IconText Kind="ArrowLeft" Text="上一步" />
+                            </Button>
+                            <Button Margin="6,0,0,0" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}">
+                                <controls:IconText Kind="ArrowRight" Text="下一页" />
+                            </Button>
+                            <Button Margin="6,0,0,0">
+                                <controls:IconText Kind="Check" Text="完成" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+
+                </materialDesign:TransitionerSlide>
+
+                <materialDesign:TransitionerSlide>
+                    <Grid>
+                        <TextBlock
+                            Margin="16,16,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource MaterialDesignBody1TextBlock}"
+                            Text="在这里，您可以创建新的配置文件或修改现有配置。" />
+
+                        <StackPanel
+                            Grid.Row="1"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                            <Button Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" Style="{StaticResource MaterialDesignPaperButton}">
+                                <controls:IconText Kind="ArrowLeft" Text="上一步" />
+                            </Button>
+                            <Button Margin="6,0,0,0" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}">
+                                <controls:IconText Kind="ArrowRight" Text="下一页" />
+                            </Button>
+                            <Button Margin="6,0,0,0">
+                                <controls:IconText Kind="Check" Text="完成" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>
 
 
 
 
-            <StackPanel
-                Grid.Row="1"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal">
-                <Button Style="{StaticResource MaterialDesignPaperButton}">
-                    <controls:IconText Kind="ArrowLeft" Text="上一步" />
-                </Button>
-                <Button Margin="6,0,0,0">
-                    <controls:IconText Kind="ArrowRight" Text="下一页" />
-                </Button>
-                <Button Margin="6,0,0,0">
-                    <controls:IconText Kind="Check" Text="完成" />
-                </Button>
-            </StackPanel>
+
         </Grid>
     </Grid>
 </Window>

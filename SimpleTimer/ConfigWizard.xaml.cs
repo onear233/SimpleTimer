@@ -22,6 +22,7 @@ namespace SimpleTimer
         public ConfigWizard()
         {
             InitializeComponent();
+            
         }
     }
 }
