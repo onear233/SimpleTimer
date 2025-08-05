@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleTimer.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,17 @@ namespace SimpleTimer
         public ConfigWizard()
         {
             InitializeComponent();
-            
+            this.DataContext = new ConfigWizardViewModel();
+        }
+
+
+
+        /*
+         * FOR TEST PURPOSES ONLY
+         */
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
