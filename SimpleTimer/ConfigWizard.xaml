@@ -12,7 +12,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:viewmodels="clr-namespace:SimpleTimer.ViewModels"
     Title="创建新配置文件向导"
-    Width="800"
+    Width="600"
     Height="450"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -99,8 +99,8 @@
                                         IsTabStop="False" />
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                            <system:String>命名</system:String>
-                            <system:String>时间</system:String>
+                            <system:String>配置文件命名</system:String>
+                            <system:String>时间段命名</system:String>
                             <system:String>完成</system:String>
                         </ListBox>
                     </StackPanel>
@@ -122,12 +122,15 @@
                                 Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                 Text="欢迎使用 SimpleTimer 配置向导" />
                             <TextBlock
-                                Margin="16,16,0,0"
-                                HorizontalAlignment="Left"
+                                Margin="15,25,0,0"
+                                HorizontalAlignment="Center"
                                 VerticalAlignment="Top"
                                 Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                                 Text="第一步：为配置文件命名并指定其时间段" />
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <StackPanel
+                                Margin="20"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
                                 <TextBox
                                     Width="256"
                                     Margin="10"
@@ -175,25 +178,43 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
-                            <!--<Button Margin="6,0,0,0">
-                                <controls:IconText Kind="Check" Text="完成" />
-                            </Button>-->
                         </StackPanel>
                     </Grid>
                 </materialDesign:TransitionerSlide>
-                
+
                 <!--  配置向导第二页：写入时间段  -->
                 <materialDesign:TransitionerSlide>
                     <Grid>
                         <StackPanel>
                             <TextBlock
-                                Margin="16,16,0,0"
-                                HorizontalAlignment="Left"
+                                Margin="15,25,0,0"
+                                HorizontalAlignment="Center"
                                 VerticalAlignment="Top"
                                 Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                                 Text="第二步：为每个时间段命名" />
-                            
+
+                            <!--  动态生成TextBox的区域  -->
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding TextValues}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox
+                                            Width="256"
+                                            Margin="10"
+                                            HorizontalAlignment="Center"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </StackPanel>
+
+
                         <StackPanel
                             Grid.Row="1"
                             Margin="0,0,16,16"
@@ -208,8 +229,6 @@
                             </Button>
                             <Button Margin="6,0,0,0">
                                 <controls:IconText Kind="ArrowRight" Text="下一步" />
-
-
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
                                         <i:InvokeCommandAction Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
@@ -217,18 +236,65 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:TransitionerSlide>
+
+                <!--  配置向导第三页：写入详细信息  -->
+                <materialDesign:TransitionerSlide>
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="15,25,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                Text="第三步：完成下表" />
+                            <DataGrid
+                                AutoGenerateColumns="False"
+                                CanUserAddRows="False"
+                                ItemsSource="{Binding TimelineItems}"
+                                SelectionMode="Extended"
+                                SelectionUnit="Cell"
+                                Margin="10">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding TimeIndex}" Header="序号" />
+                                    <DataGridCheckBoxColumn Binding="{Binding IsIncludePrevious}" Header="包含到上一个时间段" />
+                                    <DataGridTextColumn Binding="{Binding TimeName}" Header="时间段名称" />
+                                    <DataGridTextColumn Binding="{Binding TimeLength}" Header="时间长度" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+
+
+                        <StackPanel
+                            Grid.Row="1"
+                            Margin="0,0,16,16"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Orientation="Horizontal">
+                            <Button
+                                Click="Button_Click"
+                                Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}"
+                                Style="{StaticResource MaterialDesignPaperButton}">
+                                <controls:IconText Kind="ArrowLeft" Text="上一步" />
+                            </Button>
                             <!--<Button Margin="6,0,0,0">
-            <controls:IconText Kind="Check" Text="完成" />
-        </Button>-->
+                                <controls:IconText Kind="ArrowRight" Text="下一步" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
+                                        <i:InvokeCommandAction Command="{Binding AddConfigCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>-->
+                            <Button Margin="6,0,0,0">
+                                <controls:IconText Kind="Check" Text="完成" />
+                            </Button>
                         </StackPanel>
                     </Grid>
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>
-
-
-
-
-
         </Grid>
     </Grid>
 </Window>
