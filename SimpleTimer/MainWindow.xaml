@@ -31,8 +31,6 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <!--<ToggleButton Grid.Column="0"
-             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />-->
                     <StackPanel
                         Grid.Column="0"
                         Margin="0,-16"
@@ -123,6 +121,26 @@
                 Grid.Row="1"
                 Width="Auto">
                 <StackPanel>
+                    <materialDesign:ColorZone
+                        Margin="10"
+                        Panel.ZIndex="1"
+                        Background="#17800080">
+                        <StackPanel Margin="8,4">
+                            <DockPanel>
+                                <materialDesign:PackIcon
+                                    Width="20"
+                                    Height="20"
+                                    Kind="MessageAlertOutline" />
+                                <TextBlock
+                                    Margin="4,0,0,0"
+                                    VerticalAlignment="Center"
+                                    TextWrapping="Wrap">
+                                    <Run Text="您正在使用本软件的初期版本，功能可能不完善，稳定性亦无法保障。如果您遇到了难以解决的Bug，可以向开发者反馈。未来本软件的UI和功能都会发生极大变化，敬请期待。" />
+                                </TextBlock>
+                            </DockPanel>
+                        </StackPanel>
+                    </materialDesign:ColorZone>
+
                     <ComboBox
                         x:Name="FilledComboBox"
                         Width="256"
@@ -130,8 +148,11 @@
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Hint="选择配置文件"
                         Style="{StaticResource MaterialDesignFilledComboBox}" />
-                    <Separator/>
-                    <TextBlock Style="{StaticResource Setting_Text_Main_Title}" HorizontalAlignment="Center" Text="或者……手动输入?"/>
+                    <Separator />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource Setting_Text_Main_Title}"
+                        Text="或者……手动输入?" />
                     <StackPanel>
 
                         <TextBox
@@ -146,7 +167,6 @@
                         <TextBox
                             MaxWidth="256"
                             Margin="10"
-                            
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="抓捕时间"
                             AcceptsReturn="True"
@@ -156,7 +176,6 @@
                         <TextBox
                             MaxWidth="256"
                             Margin="10"
-                            
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="全UI时间"
                             AcceptsReturn="True"
@@ -166,15 +185,27 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Button
+                <StackPanel
                     Margin="24"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                    Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    ToolTip="开始计时">
-                    <materialDesign:PackIcon Kind="Play" Style="{StaticResource Large_Circle_Icon_Style}" />
-                </Button>
+                    Orientation="Horizontal">
+
+                    <Button
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        ToolTip="添加新配置文件">
+                        <materialDesign:PackIcon Kind="Add" Style="{StaticResource Large_Circle_Icon_Style}" />
+                    </Button>
+                    <Button
+                        Margin="20,0,0,0"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        ToolTip="开始计时">
+                        <materialDesign:PackIcon Kind="Play" Style="{StaticResource Large_Circle_Icon_Style}" />
+                    </Button>
+                </StackPanel>
+
             </Grid>
 
 

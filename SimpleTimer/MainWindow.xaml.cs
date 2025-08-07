@@ -21,6 +21,7 @@ namespace SimpleTimer
 
         private async void ShowRestartDialog()
         {
+            //TODO
             Application.Current.Shutdown();
         }
 
