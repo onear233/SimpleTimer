@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SimpleTimer.Models;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SimpleTimer
@@ -8,9 +9,11 @@ namespace SimpleTimer
     /// </summary>
     public partial class TimerWindow : Window
     {
-        public TimerWindow()
+        private ConfigModel Config { get; set; }
+        public TimerWindow(ConfigModel config)
         {
             InitializeComponent();
+            this.Config = config;
         }
 
         //窗口拖动

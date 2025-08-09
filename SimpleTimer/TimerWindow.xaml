@@ -15,7 +15,11 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     MouseLeftButtonDown="Window_MouseLeftButtonDown"
+    xmlns:viewmodels="clr-namespace:SimpleTimer.ViewModels"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <viewmodels:TimerViewModel />
+    </Window.DataContext>
     <Grid>
         <StackPanel
             VerticalAlignment="Center"
@@ -34,7 +38,7 @@
                 FontSize="26"
                 FontWeight="Bold"
                 Foreground="Black"
-                Text="01:24" />
+                Text="{Binding RemainingTime}" />
         </StackPanel>
     </Grid>
 </Window>

@@ -2,7 +2,7 @@
 
 namespace SimpleTimer.Models
 {
-    partial class ConfigModel
+    public partial class ConfigModel
     {
         /*
          * 配置文件模型

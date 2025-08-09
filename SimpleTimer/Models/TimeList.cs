@@ -2,7 +2,7 @@
 
 namespace SimpleTimer.Models
 {
-    class TimeList
+    public class TimeList
     {
         //时间排序
         private int timeIndex;

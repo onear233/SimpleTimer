@@ -149,12 +149,11 @@
                         materialDesign:HintAssist.Hint="选择配置文件"
                         Style="{StaticResource MaterialDesignFilledComboBox}" />
                     <Separator />
-                    <TextBlock
+                    <!--<TextBlock
                         HorizontalAlignment="Center"
                         Style="{StaticResource Setting_Text_Main_Title}"
-                        Text="或者……手动输入?" />
-                    <StackPanel>
-
+                        Text="或者……手动输入?" />-->
+                    <!--<StackPanel>
                         <TextBox
                             MaxWidth="256"
                             Margin="10"
@@ -182,7 +181,12 @@
                             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}"
                             Style="{StaticResource MaterialDesignFilledTextBox}"
                             TextWrapping="Wrap" />
-                    </StackPanel>
+                    </StackPanel>-->
+                    <!--TODO-->
+                    <Button Margin="10"
+                        Width="128"
+                            Content="导入配置文件"
+                            Click="Import_Config_Button_Click"/>
                 </StackPanel>
 
                 <StackPanel
@@ -194,14 +198,16 @@
                     <Button
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"
-                        ToolTip="添加新配置文件">
+                        ToolTip="添加新配置文件"
+                        Click="Add_Button_Click">
                         <materialDesign:PackIcon Kind="Add" Style="{StaticResource Large_Circle_Icon_Style}" />
                     </Button>
                     <Button
                         Margin="20,0,0,0"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"
-                        ToolTip="开始计时">
+                        ToolTip="开始计时"
+                        Click="Start_Button_Click">
                         <materialDesign:PackIcon Kind="Play" Style="{StaticResource Large_Circle_Icon_Style}" />
                     </Button>
                 </StackPanel>
