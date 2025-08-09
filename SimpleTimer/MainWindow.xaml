@@ -135,7 +135,7 @@
                                     Margin="4,0,0,0"
                                     VerticalAlignment="Center"
                                     TextWrapping="Wrap">
-                                    <Run Text="您正在使用本软件的初期版本，功能可能不完善，稳定性亦无法保障。如果您遇到了难以解决的Bug，可以向开发者反馈。未来本软件的UI和功能都会发生极大变化，敬请期待。" />
+                                    <Run Text="您正在使用本软件的初期版本，功能可能不完善，稳定性亦无法保障。如果您遇到了Bug，可以向开发者反馈。未来本软件的UI和功能都会发生极大变化，敬请期待。" />
                                 </TextBlock>
                             </DockPanel>
                         </StackPanel>

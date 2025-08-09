@@ -279,17 +279,14 @@
                                 Style="{StaticResource MaterialDesignPaperButton}">
                                 <controls:IconText Kind="ArrowLeft" Text="上一步" />
                             </Button>
-                            <!--<Button Margin="6,0,0,0">
-                                <controls:IconText Kind="ArrowRight" Text="下一步" />
+                            <Button Margin="6,0,0,0">
+                                <controls:IconText Kind="Check" Text="完成" />
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
                                         <i:InvokeCommandAction Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
-                                        <i:InvokeCommandAction Command="{Binding AddConfigCommand}" />
+                                        <i:InvokeCommandAction Command="{Binding SaveConfigCommand}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                            </Button>-->
-                            <Button Margin="6,0,0,0">
-                                <controls:IconText Kind="Check" Text="完成" />
                             </Button>
                         </StackPanel>
                     </Grid>

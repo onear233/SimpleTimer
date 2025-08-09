@@ -21,6 +21,6 @@ namespace SimpleTimer.Models
 
         public string Name { get => _name; set => _name = value; }
         public int TimeIntervalCount { get => _timeIntervalCount; set => _timeIntervalCount = value; }
-        internal List<TimeList> TimeList { get => _timeList; set => _timeList = value; }
+        public List<TimeList> TimeList { get => _timeList; set => _timeList = value; }
     }
 }

@@ -1,10 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using SimpleTimer.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SimpleTimer.ViewModels
@@ -22,13 +26,14 @@ namespace SimpleTimer.ViewModels
         private int slideIndex = 0;
 
         [ObservableProperty]
-        private string configName = "DefaultName";
+        private string configName = "NewConfig";
 
         [ObservableProperty]
         private int timeIntervalCount = 1;
 
         //Command
         public ICommand AddConfigCommand { get; set; }
+        public ICommand SaveConfigCommand { get; set; }
 
 
         //存储第二页文本框内容的集合
@@ -45,6 +50,7 @@ namespace SimpleTimer.ViewModels
         public ConfigWizardViewModel()
         {
             AddConfigCommand = new RelayCommand(AddConfig);
+            SaveConfigCommand = new RelayCommand(SaveConfig);
         }
 
         // 添加配置
@@ -54,6 +60,21 @@ namespace SimpleTimer.ViewModels
             configModel.TimeIntervalCount = TimeIntervalCount;
             UpdateTextBoxes();
             TimelineItems = GenerateData();
+        }
+
+        private void SaveConfig()
+        {
+            configModel.TimeList = TimelineItems.ToList();
+            string json = JsonConvert.SerializeObject(configModel, Formatting.Indented);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "所有文件 (*.*)|*.*";
+            saveFileDialog.DefaultExt = ".json";
+            saveFileDialog.FileName = configModel.Name;
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filePath = saveFileDialog.FileName;
+                File.WriteAllText(filePath, json);
+            }
         }
 
         // 更新文本框集合
