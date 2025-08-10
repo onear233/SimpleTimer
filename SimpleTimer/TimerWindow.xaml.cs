@@ -9,11 +9,9 @@ namespace SimpleTimer
     /// </summary>
     public partial class TimerWindow : Window
     {
-        private ConfigModel Config { get; set; }
-        public TimerWindow(ConfigModel config)
+        public TimerWindow()
         {
             InitializeComponent();
-            this.Config = config;
         }
 
         //窗口拖动

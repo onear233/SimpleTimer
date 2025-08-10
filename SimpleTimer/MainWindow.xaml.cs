@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Newtonsoft.Json;
 using SimpleTimer.Models;
 using System.IO;
 using System.Windows;
@@ -61,7 +62,8 @@ namespace SimpleTimer
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
-            new TimerWindow(configModel).Show();
+            new TimerWindow().Show();
+            WeakReferenceMessenger.Default.Send(configModel);
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using SimpleTimer.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace SimpleTimer.ViewModels
 {
-    public partial class TimerViewModel : ObservableObject
+    public partial class TimerViewModel : ObservableObject, IRecipient<ConfigModel> // Implement IRecipient<ConfigModel>
     {
         [ObservableProperty]
         private TimeSpan remainingTime;
@@ -17,10 +16,17 @@ namespace SimpleTimer.ViewModels
 
         public TimerViewModel()
         {
+            WeakReferenceMessenger.Default.Register(this);
             RemainingTime = TimeSpan.FromMinutes(1);
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
+        }
+
+        // Implement the Receive method required by IRecipient<ConfigModel>
+        public void Receive(ConfigModel config)
+        {
+            MessageBox.Show(config.TimeIntervalCount.ToString());
         }
 
         public void StartCountdown()
