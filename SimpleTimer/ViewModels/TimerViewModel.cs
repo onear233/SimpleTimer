@@ -24,7 +24,9 @@ namespace SimpleTimer.ViewModels
         public TimerViewModel()
         {
             WeakReferenceMessenger.Default.Register(this);
-            RemainingTime = TimeSpan.FromMinutes(1);
+            //默认时间
+            TimeName = "未配置时间段";
+            RemainingTime = TimeSpan.FromMinutes(0);
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;

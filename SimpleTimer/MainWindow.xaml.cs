@@ -1,8 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
+using SimpleTimer.Controls;
 using SimpleTimer.Models;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace SimpleTimer
 {
@@ -11,9 +15,10 @@ namespace SimpleTimer
     /// </summary>
     public partial class MainWindow : Window
     {
-        ConfigModel configModel = new ConfigModel();
+        ConfigModel configModel;
         public MainWindow()
         {
+            new TimerWindow().Show();
             InitializeComponent();
         }
 
@@ -25,7 +30,7 @@ namespace SimpleTimer
         private async void ShowRestartDialog()
         {
             //TODO
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         
@@ -37,20 +42,21 @@ namespace SimpleTimer
 
         private void Import_Config_Button_Click(object sender, RoutedEventArgs e)
         {
-            //Configure open file dialog box
+            //配置导入配置文件的窗口
             var dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.FileName = "NewConfig"; //Default file name
-            dialog.DefaultExt = ".json"; //Default file extension
+            dialog.FileName = "NewConfig";
+            dialog.DefaultExt = ".json";
             dialog.Filter = "Simple Timer Config (.json)|*.json"; //Filter files by extension
 
-            //Show open file dialog box
+            //打开文件选择窗口
             bool? result = dialog.ShowDialog();
 
-            //Process open file dialog box results
+            //选择了文件
             if (result == true)
             {
                 string filename = dialog.FileName;
                 string fileContent = File.ReadAllText(filename);
+                configModel = new ConfigModel();
                 configModel = JsonConvert.DeserializeObject<ConfigModel>(fileContent);
             }
         }
@@ -62,8 +68,17 @@ namespace SimpleTimer
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
-            new TimerWindow().Show();
-            WeakReferenceMessenger.Default.Send(configModel);
+            var sampleMessageDialog = new MessageBoxControl();
+            sampleMessageDialog.Message.Text = "未导入任何配置文件\n要开始使用，请创建或导入已有的配置文件";
+            if (configModel == null)
+            {
+                //指定DialogHost的Identifier
+                DialogHost.Show(sampleMessageDialog, "RootDialog");
+            }
+            else
+            {
+                WeakReferenceMessenger.Default.Send(configModel);
+            }
         }
     }
 }
