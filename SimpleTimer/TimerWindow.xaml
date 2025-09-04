@@ -7,38 +7,45 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:materialDesign3="http://materialdesigninxaml.net/winfx/xaml/themes/materialdesign3"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:SimpleTimer.ViewModels"
     Title="TimerWindow"
     Width="200"
     Height="70"
     AllowsTransparency="True"
+    MouseLeftButtonDown="Window_MouseLeftButtonDown"
     Opacity="0.5"
+    ResizeMode="CanResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    MouseLeftButtonDown="Window_MouseLeftButtonDown"
-    xmlns:viewmodels="clr-namespace:SimpleTimer.ViewModels"
     mc:Ignorable="d">
+    <!--使得窗口大小能被调整-->
+    <WindowChrome.WindowChrome>
+        <WindowChrome/>
+    </WindowChrome.WindowChrome>
+    
     <Window.DataContext>
         <viewmodels:TimerViewModel />
     </Window.DataContext>
-    <Grid>
-        <StackPanel
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center">
-            <TextBlock
-                Margin="3"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="16"
-                FontWeight="Bold"
-                Foreground="Black"
-                Text="{Binding TimeName}" />
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="26"
-                FontWeight="Bold"
-                Foreground="Black"
-                Text="{Binding RemainingTime}" />
-        </StackPanel>
-    </Grid>
+    <Viewbox>
+        <Grid>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock
+                    Margin="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="{Binding TimeName}" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="26"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="{Binding RemainingTime}" />
+            </StackPanel>
+        </Grid>
+    </Viewbox>
+
 </Window>

@@ -190,8 +190,15 @@
                             Margin="10"
                             Click="Import_Config_Button_Click"
                             Content="导入配置文件" />
+
+                        <!--计时器部分做调整：整体放大、透明度调整-->
+                        <!--后期可考虑加叠加颜色遮罩/高斯模糊-->
+                        <Slider Minimum="1" Maximum="5">
+                            
+                        </Slider>
                     </StackPanel>
 
+                    
                     <StackPanel
                         Margin="24"
                         HorizontalAlignment="Right"
