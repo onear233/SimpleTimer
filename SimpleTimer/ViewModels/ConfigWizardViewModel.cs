@@ -113,10 +113,10 @@ namespace SimpleTimer.ViewModels
             {
                 timeLists.Add(new TimeList
                 {
-                    TimeIndex = i + 1,
+                    TimeIndex = i ,
                     IsIncludePrevious = false,
                     TimeName = GetTextValueAt(i),
-                    TimeLength = TimeSpan.FromMinutes(5 * (i + 1))
+                    TimeLength = TimeSpan.FromMinutes(5 * (i))
                 });
             }
             return timeLists;

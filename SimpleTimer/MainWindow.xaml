@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:SimpleTimer"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="SimpleTimer v25.08.03"
+    Title="SimpleTimer v0.1 Beta"
     Width="1024"
     Height="768"
     WindowStartupLocation="CenterScreen"
@@ -83,7 +83,7 @@
                             <TextBlock
                                 Margin="8,0,0,0"
                                 VerticalAlignment="Center"
-                                Text="Version 0.1"
+                                Text="V0.1 Beta"
                                 ToolTip="应用版本" />
                             <materialDesign:PopupBox
                                 Margin="8,0,-8,0"
@@ -222,6 +222,10 @@
                         </Button>
                     </StackPanel>
                 </Grid>
+                
+
+                <!-- 确保水印覆盖所有其他控件 -->
+                <Canvas Name="canvas" Opacity="0.2" IsHitTestVisible="False"/>
             </Grid>
         </materialDesign:DialogHost>
     </Grid>

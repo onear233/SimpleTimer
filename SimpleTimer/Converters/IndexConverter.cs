@@ -11,7 +11,7 @@ namespace SimpleTimer.Converters
         {
             if (value is int index)
             {
-                return $"文本框 {index + 1}:";
+                return $"文本框 {index }:";
             }
             return "文本框:";
         }

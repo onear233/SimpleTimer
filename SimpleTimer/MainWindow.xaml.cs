@@ -3,10 +3,15 @@ using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using SimpleTimer.Controls;
 using SimpleTimer.Models;
+using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Media;
+using System.Management;
 
 namespace SimpleTimer
 {
@@ -20,7 +25,102 @@ namespace SimpleTimer
         {
             new TimerWindow().Show();
             InitializeComponent();
+
+            canvas.Visibility = Visibility.Visible;
+
         }
+
+
+
+
+
+        string watermark = "仅供测试使用，非最终release版本";
+
+
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            InitWatermark();
+        }
+
+
+        // 获取CPU序列号
+        public static string GetCPUSerialNumber()
+        {
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+                string cpuSerialNumber = "";
+                foreach (ManagementObject mo in searcher.Get())
+                {
+                    cpuSerialNumber = mo["ProcessorId"].ToString().Trim();
+                    break;
+                }
+                return cpuSerialNumber;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        private void InitWatermark()
+        {
+            canvas.Children.Clear();
+
+            FormattedText formattedText = new FormattedText(
+                watermark,
+                CultureInfo.GetCultureInfo("en-us"),
+                System.Windows.FlowDirection.LeftToRight, // 修正：使用类型名限定
+                new Typeface("Verdana"),
+                24,
+                Brushes.Black,
+                VisualTreeHelper.GetDpi(this).PixelsPerDip
+            );
+
+            var height = 100.0;
+            var width = height * Math.Sqrt(3);
+
+            if (width < formattedText.Width + 100)
+            {
+                width = formattedText.Width + 100;
+                height = width / Math.Sqrt(3);
+            }
+
+            var firstRowHeight = formattedText.Width / 2;
+
+            int colCount = (int)Math.Ceiling(ActualWidth / width);
+            int rowCount = (int)Math.Ceiling((ActualHeight - firstRowHeight) / height);
+
+            for (int i = 0; i < rowCount; ++i)
+            {
+                for (int j = 0; j < colCount; ++j)
+                {
+                    TextBlock block = new TextBlock();
+                    block.Text = watermark;
+                    Canvas.SetTop(block, firstRowHeight + i * height);
+                    Canvas.SetLeft(block, j * width);
+
+                    RotateTransform transform = new RotateTransform(-30, 0, 0);
+                    block.RenderTransform = transform;
+
+                    canvas.Children.Add(block);
+                }
+            }
+        }
+
+
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            InitWatermark();
+        }
+
+
+
+
+
 
         private void ButtonRestartApp_OnClick(object sender, RoutedEventArgs e)
         {
@@ -68,15 +168,16 @@ namespace SimpleTimer
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
-            var sampleMessageDialog = new MessageBoxControl();
-            sampleMessageDialog.Message.Text = "未导入任何配置文件\n要开始使用，请创建或导入已有的配置文件";
+            var messageDialog = new MessageBoxControl();
+            messageDialog.Message.Text = "未导入任何配置文件\n要开始使用，请创建或导入已有的配置文件";
             if (configModel == null)
             {
                 //指定DialogHost的Identifier
-                DialogHost.Show(sampleMessageDialog, "RootDialog");
+                DialogHost.Show(messageDialog, "RootDialog");
             }
             else
             {
+                this.WindowState = WindowState.Minimized;
                 WeakReferenceMessenger.Default.Send(configModel);
             }
         }
