@@ -1,8 +1,8 @@
 # SimpleTimer
 
-![Platform](https://img.shields.io/badge/platform-.NET%20%7C%20WPF-blue)
-![Language](https://img.shields.io/badge/language-C%23-green)
-![License](https://img.shields.io/badge/license-MIT-purple)
+![Platform](https://img.shields.io/badge/platform-.NET%20%7C%20WPF-blue?style=for-the-badge)
+![Language](https://img.shields.io/badge/language-C%23-green?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MPL-purple?style=for-the-badge)
 
 **SimpleTimer** 是一款基于 C# 和 WPF 开发的高颜值、轻量级定时器工具。除了满足日常的基础倒计时需求外，它还专为复杂多任务场景设计，支持多段嵌套计时与桌面悬浮窗交互。
 
