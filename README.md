@@ -29,7 +29,7 @@
 * [.NET 8.0 Runtime](https://dotnet.microsoft.com/download)
 
 ### 安装与使用
-1.  前往 [Releases](https://github.com/你的用户名/SimpleTimer/releases) 页面下载最新的压缩包。
+1.  前往 [Releases](https://github.com/onear233/SimpleTimer/releases) 页面下载最新的压缩包。
 2.  解压后双击运行 `SimpleTimer.exe` 即可启动程序。
 
 ---
